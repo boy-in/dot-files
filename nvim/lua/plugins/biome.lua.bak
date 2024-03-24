@@ -1,0 +1,19 @@
+return {
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local is_biome = require("lspconfig.util").root_pattern("biome.json", "biome.jsonc")
+      if is_biome then
+        require("lspconfig").biome.setup({})
+      end
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        typescript = { "biome" },
+      },
+    },
+  },
+}
